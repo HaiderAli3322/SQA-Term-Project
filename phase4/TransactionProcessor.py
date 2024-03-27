@@ -4,10 +4,14 @@ class TransactionProcessor:
     def __init__(self,transaction):
         self.transaction=transaction
         
-    def writeTransaction(self,transaction,fileName):
-        f = open(fileName,"a")
-        f.write(transaction)
-        f.close
+    def writeTransaction(self, transaction, fileName):
+        # Ensure the transaction ends with a newline
+        if not transaction.endswith('\n'):
+            transaction += '\n'
+        
+        # Append the transaction to the file
+        with open(fileName, "a") as f:
+            f.write(transaction)
 
 
 def main():

@@ -8,51 +8,51 @@ class TestTransactionProcessor:
         with open(file_name, "r") as file:
             return file.read()
 
-    def test_write_transaction(self):
+    def test_write_transaction(self,tmp_path):
         # Test data
         transaction = "Test transaction data."
-        file_name = "test_transactions.txt"
+        file_name = tmp_path / "test_transactions.txt"
 
         # Create an instance of TransactionProcessor
         processor = TransactionProcessor(transaction)
 
         # Write transaction to file
-        processor.writeTransaction(transaction, file_name)
+        processor.writeTransaction(transaction, str(file_name))
 
         # Read content from the file and assert
-        content = self.read_file_content(file_name)
-        assert content == transaction
+        content = self.read_file_content(str(file_name))
+        assert content == transaction + "\n"
 
-    def test_append_multiple_transactions(self):
+    def test_append_multiple_transactions(self,tmp_path):
         # Test data
         transactions = ["Transaction 1", "Transaction 2", "Transaction 3"]
-        file_name = "test_transactions.txt"
+        file_name = tmp_path / "test_transactions.txt"
 
         # Create an instance of TransactionProcessor
         processor = TransactionProcessor("")
 
         # Write transactions to file
         for transaction in transactions:
-            processor.writeTransaction(transaction + "\n", file_name)
+            processor.writeTransaction(transaction + "\n", str(file_name))
 
         # Read content from the file and assert
         content = self.read_file_content(file_name)
         assert content == "\n".join(transactions) + "\n"
 
-    def test_write_empty_transaction(self):
+    def test_write_empty_transaction(self,tmp_path):
         # Test data
         transaction = ""
-        file_name = "test_transactions.txt"
+        file_name = tmp_path / "test_transactions.txt"
 
         # Create an instance of TransactionProcessor
         processor = TransactionProcessor("")
 
         # Write empty transaction to file
-        processor.writeTransaction(transaction, file_name)
+        processor.writeTransaction(transaction, str(file_name))
 
         # Read content from the file and assert
-        content = self.read_file_content(file_name)
-        assert content == transaction
+        content = self.read_file_content(str(file_name))
+        assert content == transaction+ "\n"
 
     def test_write_to_existing_file(self):
         # Test data
