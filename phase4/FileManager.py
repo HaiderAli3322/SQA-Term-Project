@@ -7,14 +7,13 @@ class FileManager:
     def readFile(self,fileName):
         ##get file name most likely from file path 
         
-        f = open(fileName,"r")
-        print(f.read)
-        f.close()
+        with open(fileName, "r") as f:
+            return f.read()
         
-    def logError(self,fileName,error):
-        f= open(fileName,"a")
-        f.write(error)
-        f.close
+    def logError(self, fileName, error):
+        with open(fileName, "w") as f:
+            f.write(error)
+
     
     def updateFile(self,fileName,transaction):
         f=open(fileName,"a")

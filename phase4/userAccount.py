@@ -5,12 +5,19 @@ class UserAccount:
         self.userType = userType
         self.gameCollection = gameCollection
 
+
     def depositBalance(self, amount):
+        if amount < 0:
+            raise ValueError("Cannot deposit a negative amount.")
         self.balance += amount
 
     def withdrawBalance(self, amount):
+        if amount < 0:
+            raise ValueError("Cannot withdraw a negative amount.")
+        if amount > self.balance:
+            raise ValueError("Cannot withdraw more than the current balance.")
         self.balance -= amount
-
+        
     def getUserCollection(self):
         return self.gameCollection
 

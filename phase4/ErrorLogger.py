@@ -1,9 +1,12 @@
 class ErrorLogger:
-    errors=[]
+    def __init__(self):
+        self.errors = []
     
     def recordError(self,error):
+        if not isinstance(error, str):
+            raise TypeError("Error message must be a string")
         self.errors.append(error)
-        
+
     def displayError(self):
         print(self.errors)
 
